@@ -1,57 +1,26 @@
-name: Flutter Web Firebase Deploy
-
+name: Branch Service Flutter Web CI/CD to Firebase
 on:
   push:
     branches:
-      - main  # Change if your default branch is different
-
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
-    env:
-      BUILD_DIR: build/web
-
     steps:
-      # 1. Checkout the repo
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # 2. Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.0'  # Change to your Flutter version
-
-      # 3. Enable Flutter Web
-      - name: Enable Flutter Web
-        run: flutter config --enable-web
-
-      # 4. Cache Flutter dependencies
-      - name: Cache Flutter Pub Packages
-        uses: actions/cache@v3
+          channel: 'stable'
+          architecture: x64
+      - run: flutter pub get
+      - run: flutter build web --release
+      - run: curl -sL https://firebase.tools | bash
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          path: |
-            ~/.pub-cache
-            ${{ github.workspace }}/.dart_tool
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
-
-      # 5. Get Flutter dependencies
-      - name: Flutter Pub Get
-        run: flutter pub get
-
-      # 6. Build Flutter Web
-      - name: Build Flutter Web
-        run: flutter build web --release
-
-      # 7. Install Firebase CLI
-      - name: Install Firebase CLI
-        run: curl -sL https://firebase.tools | bash
-
-      # 8. Deploy to Firebase Hosting
-      - name: Deploy to Firebase Hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_COOPMINIAPPS }}
-        run: firebase deploy --only hosting --project coopminiapps
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_COOPMINIAPPS}}"
+          channelId: live
+          projectId: coopminiapps
