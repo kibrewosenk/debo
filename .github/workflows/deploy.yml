@@ -53,5 +53,5 @@ jobs:
       # 8. Deploy to Firebase Hosting
       - name: Deploy to Firebase Hosting
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_COOPMINIAPPS }}
         run: firebase deploy --only hosting --project coopminiapps
