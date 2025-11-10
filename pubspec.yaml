@@ -1,0 +1,25 @@
+name: debo
+description: "A new Flutter project."
+publish_to: 'none' # Prevents accidental publishing to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0' # More flexible SDK constraint
+
+dependencies:
+  flutter:
+    sdk: flutter
+  image_picker: ^1.1.2 # Latest stable version
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0 # Latest version with improved linting
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/   # Put all your images here (school.png, medical.png, etc.)
