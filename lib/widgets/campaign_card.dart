@@ -38,7 +38,6 @@ class CampaignCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Square image at mid top with featured badge
                   Stack(
                     children: [
                       Container(
@@ -259,7 +258,7 @@ class CampaignCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
 
                     // Progress bar
                     ProgressBar(
