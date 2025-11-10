@@ -28,9 +28,11 @@ class CampaignCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 3,
       child: Container(
+
         height: 240, // Fixed height
         child: Stack(
           children: [
+
             // Background content with InkWell for taps outside the button
             InkWell(
               onTap: onTap,
@@ -169,40 +171,44 @@ class CampaignCard extends StatelessWidget {
               ),
             ),
 
+            // Positioned(
+            //   bottom: 12,
+            //   left: 120,
+            //   right: 120,
+            //   child: SizedBox(
+            //     height: 26,
+            //     child: ElevatedButton(
+            //       onPressed: onDonate,
+            //       style: ButtonStyle(
+            //         backgroundColor: MaterialStateProperty.all(const Color(0xFF00ADEF)),
+            //         foregroundColor: MaterialStateProperty.all(Colors.white),
+            //         shape: MaterialStateProperty.all(
+            //           RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(8),
+            //           ),
+            //         ),
+            //         overlayColor: MaterialStateProperty.all(const Color(0xFF00ADEF)), // keeps pressed color same
+            //         shadowColor: MaterialStateProperty.all(Colors.transparent), // optional: removes elevation shadow
+            //       ),
+            //       child: const Text(
+            //         'Donate Now',
+            //         style: TextStyle(
+            //           fontSize: 12,
+            //           fontWeight: FontWeight.w600,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
             // Donate button positioned at bottom
-            Positioned(
-              bottom: 12,
-              left: 120,
-              right: 120,
-              child: SizedBox(
-                height: 26,
-                child: ElevatedButton(
-                  onPressed: onDonate,
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(const Color(0xFF00ADEF)),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    overlayColor: MaterialStateProperty.all(const Color(0xFF00ADEF)), // keeps pressed color same
-                    shadowColor: MaterialStateProperty.all(Colors.transparent), // optional: removes elevation shadow
-                  ),
-                  child: const Text(
-                    'Donate Now',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+           ],
         ),
+
       ),
+
     );
+
   }
 
   Widget _buildListCard() {
