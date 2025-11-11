@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'models.dart';
 import 'utils.dart';
 import 'dart:js' as js;
+import 'dart:html' as html;
+import 'donationStatusPage.dart';
 
 class DonationPage extends StatefulWidget {
   final Campaign campaign;
@@ -21,12 +23,34 @@ class _DonationPageState extends State<DonationPage> {
   final List<String> quickAmounts = ['10', '50', '100', '500'];
 
   @override
+  void initState() {
+    super.initState();
+    // Listen for hash changes
+    html.window.onHashChange.listen((event) {
+      _handleHashChange(html.window.location.hash);
+    });
+    // Check initial hash (in case user reloads with hash)
+    _handleHashChange(html.window.location.hash);
+  }
+
+  void _handleHashChange(String hash) {
+    final cleanHash = hash.replaceFirst('#', '');
+    if (cleanHash == 'success' || cleanHash == 'fail') {
+      // Navigate to status page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => DonationStatusPage(status: cleanHash),
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Make a Donation'),
-        backgroundColor: const Color(0xFF00ADEF),
-        foregroundColor: Colors.white,
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -173,48 +197,6 @@ class _DonationPageState extends State<DonationPage> {
                 ),
                 maxLines: 3,
               ),
-              const SizedBox(height: 20),
-
-              // Anonymous Donation
-              Card(
-                elevation: 1,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.visibility_off, color: Color(0xFF00ADEF)),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Donate Anonymously',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              'Your name won\'t be shown publicly',
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Switch(
-                        value: anonymous,
-                        onChanged: (value) => setState(() => anonymous = value),
-                        activeColor: const Color(0xFF00ADEF),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               const Spacer(),
 
               // Donate Button
@@ -230,23 +212,11 @@ class _DonationPageState extends State<DonationPage> {
                           : 'Donation to ${widget.campaign.organizer}';
 
                       final jsCode = '''
-      const fromAccount = ''; // empty
-      const toAccount = '${Uri.encodeComponent(widget.campaign.organizer)}';
-      const amount = '${Uri.encodeComponent(amount)}';
-      const description = '${Uri.encodeComponent(description)}';
+                        window.location.hash =
+                          'action=confirmpayment&from=&to=${Uri.encodeComponent(widget.campaign.organizer)}&amount=${Uri.encodeComponent(amount)}&desc=${Uri.encodeComponent(description)}';
+                      ''';
 
-      window.location.hash =
-        'action=confirmpayment&from=' + fromAccount +
-        '&to=' + toAccount +
-        '&amount=' + amount +
-        '&desc=' + description;
-    ''';
-
-                      // Trigger the action
                       js.context.callMethod('eval', [jsCode]);
-
-                      // Close donation page if needed
-                      Navigator.pop(context);
                     }
                   },
                   style: ElevatedButton.styleFrom(

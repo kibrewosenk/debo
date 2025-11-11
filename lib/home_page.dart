@@ -62,23 +62,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.favorite, color: Colors.white, size: 24),
-            SizedBox(width: 8),
-            Text(
-              'Debo',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: const Color(0xFF00ADEF),
-        elevation: 0,
+
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showNewCampaignForm,

@@ -13,17 +13,17 @@ class CampaignDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(campaign.title),
-        backgroundColor: const Color(0xFF00ADEF),
-        foregroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {
-              // Share functionality
-            },
-          ),
-        ],
+      //   title: Text(campaign.title),
+      //   backgroundColor: const Color(0xFF00ADEF),
+      //   foregroundColor: Colors.white,
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.share),
+      //       onPressed: () {
+      //         // Share functionality
+      //       },
+      //     ),
+      //   ],
       ),
       body: Column(
         children: [
