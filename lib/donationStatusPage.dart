@@ -13,22 +13,22 @@ class _DonationStatusPageState extends State<DonationStatusPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      //   title: Text(
-      //     widget.status == 'success' ? 'Donation Successful' : 'Donation Failed',
-      //     style: const TextStyle(color: Colors.white),
-      //   ),
-      //   backgroundColor: widget.status == 'success'
-      //       ? const Color(0xFF00ADEF)
-      //       : Colors.red,
-      //   foregroundColor: Colors.white,
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.arrow_back),
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //   ),
-      ),
+      // appBar: AppBar(
+      // //   title: Text(
+      // //     widget.status == 'success' ? 'Donation Successful' : 'Donation Failed',
+      // //     style: const TextStyle(color: Colors.white),
+      // //   ),
+      // //   backgroundColor: widget.status == 'success'
+      // //       ? const Color(0xFF00ADEF)
+      // //       : Colors.red,
+      // //   foregroundColor: Colors.white,
+      // //   leading: IconButton(
+      // //     icon: const Icon(Icons.arrow_back),
+      // //     onPressed: () {
+      // //       Navigator.pop(context);
+      // //     },
+      // //   ),
+      // ),
       body: _buildStatusContent(),
     );
   }

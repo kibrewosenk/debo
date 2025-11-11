@@ -49,9 +49,9 @@ class _DonationPageState extends State<DonationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      // appBar: AppBar(
+      //
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Form(

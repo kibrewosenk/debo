@@ -61,9 +61,7 @@ class _HomePageState extends State<HomePage> {
     allCampaigns.where((c) => !c.isFeatured).toList();
 
     return Scaffold(
-      appBar: AppBar(
 
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showNewCampaignForm,
         backgroundColor: const Color(0xFF00ADEF),
